@@ -9,6 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <name>lab10</name>
 
+    <properties>
+        <!-- Set Java version compatibility -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <!-- Google Cloud Vision -->
         <dependency>
@@ -36,19 +42,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version> <!-- Updated to latest stable version -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version> <!-- Updated to latest stable version -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.8.2</version> <!-- Updated to latest stable version -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -56,28 +62,45 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.0.0</version> <!-- Updated to latest stable version -->
+            <version>4.0.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
-    <properties>
-        <!-- Set Java version compatibility -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-    </properties>
 
     <build>
         <plugins>
-            <!-- Configure Maven Compiler Plugin for JDK 21 -->
+            <!-- Maven Compiler Plugin for JDK 21 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version> <!-- Make sure it's compatible with Java 21 -->
+                <version>3.10.1</version>
                 <configuration>
-                    <release>21</release> <!-- Use the Java release flag for better compatibility -->
+                    <release>21</release> <!-- Ensure compatibility with Java 21 -->
                 </configuration>
+            </plugin>
+
+            <!-- Surefire Plugin for JUnit 5 support -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version> <!-- Latest version for better JUnit 5 support -->
+                <configuration>
+                    <useModulePath>false</useModulePath> <!-- Fix for JUnit 5+ on JDK 9+ -->
+                </configuration>
+            </plugin>
+
+            <!-- Javadoc plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
